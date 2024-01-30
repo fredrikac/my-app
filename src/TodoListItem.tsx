@@ -1,6 +1,9 @@
 import React from "react";
-import Button from "./Button";
+import Button from "@mui/material/Button";
 import { TodoItem } from "./TodoList";
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import Checkbox from "@mui/material/Checkbox";
+import ListItem from '@mui/material/ListItem';
 
 type TodoItemProps = {
   todo: TodoItem;
@@ -10,17 +13,24 @@ type TodoItemProps = {
 
 export default function TodoListItem({ todo, onToggleComplete, onRemove }: TodoItemProps) {
   return(
-    <li key={todo.id}>
-      <span style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>
-        {todo.text}
-      </span>
-      <input
-        type="checkbox"
+    <ListItem key={todo.id}>
+      <Checkbox 
+      edge='start'
+        size='medium'
         checked={todo.completed}
         onChange={() => onToggleComplete(todo.id)}
-      />
-      <Button onClick={() => onRemove(todo.id)} text={'Remove'} />
-    </li>
+       />
+       <span style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>
+       {todo.text}
+      </span>
+      <Button 
+        size='small'
+        variant='outlined'
+        startIcon={<DeleteOutlineIcon />}
+        onClick={() => onRemove(todo.id)}>
+      {'Delete'}
+      </Button>
+    </ListItem>
   )
 
 }

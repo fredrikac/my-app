@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import TodoItem from "./TodoListItem";
+import Button from '@mui/material/Button'
+import { TextField } from "@mui/material";
+import List from '@mui/material/List';
 
 type TodoItem = {
   id: string;
@@ -43,13 +46,22 @@ export default function TodoList(){
 
   return(
     <div>
-      <input
-        type="text"
+      <TextField
+        helperText='Describe what needs to be done'
+        label='Stuff to do'
+        type='type'
+        size='small'
+        variant='outlined'
         value={newTodo}
         onChange={(e) => setNewTodo(e.target.value)}
       />
-      <button onClick={addTodo}>Add Todo</button>
-        <ul>
+      <Button 
+        variant='contained'
+        size='medium'
+        onClick={addTodo}>
+          Add Todo
+      </Button>
+        <List>
           {todos.map((todo) => (
             <TodoItem
               key={todo.id}
@@ -58,7 +70,7 @@ export default function TodoList(){
               onRemove={removeTodo}
             />
             ))}
-        </ul>
+        </List>
     </div>
   )
 };
